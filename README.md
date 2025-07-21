@@ -73,48 +73,6 @@ python finetune_t3.py \
 --text_column_name text_scribe
 ```
 
-### Thai Language Fine-tuning
-
-For Thai language fine-tuning using the GigaSpeech2 dataset with streaming:
-
-```bash
-python src/finetune_t3_thai.py \
---dataset_name "speechcolab/gigaspeech2" \
---use_streaming \
---output_dir "./checkpoints/thai_run" \
---max_steps 10000 \
---per_device_train_batch_size 4 \
---gradient_accumulation_steps 4 \
---learning_rate 5e-5 \
---warmup_steps 500 \
---logging_steps 10 \
---save_strategy "steps" \
---save_steps 1000 \
---save_total_limit 3 \
---fp16 \
---report_to "tensorboard" \
---dataloader_num_workers 4 \
---do_train \
---local_model_dir "chatterbox-weight"
-```
-
-### Thai TTS Inference
-
-```python
-from chatterbox_thai import ChatterboxThaiTTS
-
-# Initialize the model
-tts = ChatterboxThaiTTS()
-
-# Generate speech from Thai text
-text = "สวัสดีครับ ผมชื่อชาตเตอร์บ็อกซ์"
-wav = tts.generate(text)
-
-# Save the audio
-import torchaudio
-torchaudio.save("thai_output.wav", wav, tts.sr)
-```
-
 ## Tokenization Strategies
 
 The repository includes multiple tokenization approaches for Thai:
